@@ -123,6 +123,7 @@ android {
 
 		// Defines the version number of your app.
 		versionCode = extra["gitVersionCode"] as? Int
+		versionCode = versionCode?.inc()
 
 		// Defines a user-friendly version name for your app.
 		versionName = extra["gitVersionName"] as? String
