@@ -258,10 +258,12 @@ jobs:
           rustup target add aarch64-apple-darwin
           tag=${GITHUB_REF#refs/*/}
           if [[ "$tag" == v* ]]; then
-            cd gui
             echo "Overwriting version: $tag"
-            pnpm version "$tag" --no-git-tag-version --workspaces-update false
+            cd gui
+            pnpm version "$tag" --force --allow-same-version --workspaces-update false
+            git add package.json
             cd ..
+            pnpm version "$tag" --force --allow-same-version --workspaces-update false
           fi
           pnpm i
           pnpm run tauri build --target universal-apple-darwin
